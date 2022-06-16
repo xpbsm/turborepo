@@ -95,8 +95,13 @@ func (ap AbsolutePath) FileExists() bool {
 
 // DirExists returns true if this path points to a directory
 func (ap AbsolutePath) DirExists() bool {
-	info, err := os.Lstat(ap.asString())
+	info, err := ap.Lstat()
 	return err == nil && info.IsDir()
+}
+
+// Lstat implements os.Lstat for an absolute path
+func (ap AbsolutePath) Lstat() (iofs.FileInfo, error) {
+	return os.Lstat(ap.asString())
 }
 
 // ReadFile reads the contents of the specified file

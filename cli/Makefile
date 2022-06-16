@@ -12,7 +12,7 @@ GO_FILES = $(shell find . -name "*.go")
 SRC_FILES = $(shell find . -name "*.go" | grep -v "_test.go")
 
 turbo: compile-protos $(SRC_FILES) go.mod
-	CGO_ENABLED=0 go build $(GO_FLAGS) ./cmd/turbo
+	CGO_ENABLED=1 go build $(GO_FLAGS) ./cmd/turbo
 
 compile-protos: internal/turbodprotocol/turbod.proto
 	protoc --go_out=. --go_opt=paths=source_relative \
